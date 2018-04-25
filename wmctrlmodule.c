@@ -30,5 +30,20 @@ PyMODINIT_FUNC PyInit_wmctrl(void) {
 }
 
 int main(int argc, char *argv[]) {
+    /* Add a built-in module, before Py_Initialize */
+    PyImport_AppendInittab("wmctrl", PyInit_wmctrl);
+
+    /* Pass argv[0] to the Python interpreter */
+    Py_SetProgramName(argv[0]);
+
+    /* Initialize the Python interpreter.  Required. */
+    Py_Initialize();
+
+    /* Optionally import the module; alternatively,
+       import can be deferred until the embedded script
+       imports it. */
+    PyImport_ImportModule("wmctrl");
+
+    PyMem_RawFree(argv[0]);
     return 0;
 }
