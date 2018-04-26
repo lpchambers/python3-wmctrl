@@ -1,17 +1,26 @@
 #include <Python.h>
+#include <X11/Xlib.h>
+
+static int get_x_display(char *display_name, Display *disp) {
+    if (! (disp = XOpenDisplay(display_name))) {
+        // Set the error vars
+        return -1;
+    }
+    return 0;
+}
 
 static PyObject *wmctrl_list_windows(PyObject *self, PyObject *args) {
-    const char *command;
-    int sts;
-    
-    if (!PyArg_ParseTuple(args, "s", &command))
+    Display *disp;
+
+    if (get_x_display(NULL, disp) != 0) {
         return NULL;
-    sts = system(command);
-    return PyLong_FromLong(sts);    
+    }
+
+    return PyLong_FromLong(3);
 }
 
 static PyMethodDef WmctrlMethods[] = {
-    {"list_windows", wmctrl_list_windows, METH_VARARGS,
+    {"list_windows", wmctrl_list_windows, METH_NOARGS,
      "List List windows managed by the window manager."},
     // METH_NOARGS
     {NULL, NULL, 0, NULL}  /* Sentinel */
