@@ -1,8 +1,8 @@
-#python3-wmctrl
+# python3-wmctrl
 
 python3 bindings for wmctrl
 
-##Installation
+## Installation
 
 Install from Pypi:
 ```
