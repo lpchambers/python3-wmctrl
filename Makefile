@@ -5,7 +5,7 @@ PYTHON = $(shell which python3)
 SRCDIR = wmctrl
 SOURCES = $(SRCDIR)/wmctrlmodule.c
 
-.PHONY: clean rpm build test
+.PHONY: clean rpm build test install
 
 wmctrl.so: $(SOURCES) setup.py
 	python3 setup.py build
@@ -21,4 +21,7 @@ clean:
 	rm MANIFEST
 
 test: wmctrl.so
-	(cd test; $(PYTHON) -m pytest .)
+	$(PYTHON) -m pytest .
+
+install: setup.py $(SOURCES)
+	python3 setup.py install
