@@ -7,11 +7,9 @@ SOURCES = $(SRCDIR)/wmctrlmodule.c
 
 .PHONY: clean rpm build test
 
-lala: $(SOURCES) setup.py
+wmctrl.so: $(SOURCES) setup.py
 	python3 setup.py build
-
-wmctrl.so: wmctrlmodule.c
-	gcc -Wall $(CFLAGS) $(LDFLAGS) wmctrlmodule.c -o wmctrl.so
+	cp build/lib.linux-x86_64*/wmctrl.cpython*.so ./wmctrl.so
 
 rpm: setup.py wmctrlmodule.c
 	python3 setup.py bdist_rpm
@@ -19,6 +17,8 @@ rpm: setup.py wmctrlmodule.c
 clean:
 	python3 setup.py clean
 	rm -rf build/ dist/
+	rm -f wmctrl.so
+	rm MANIFEST
 
-test:
+test: wmctrl.so
 	(cd test; $(PYTHON) -m pytest .)
