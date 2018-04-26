@@ -1,9 +1,27 @@
+import os
 from distutils.core import setup, Extension
 
-module1 = Extension('wmctrl',
-                    sources = ['wmctrlmodule.c'])
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-setup (name = 'wmctrl',
-       version = '1.0',
-       description = 'This is a demo package',
-       ext_modules = [module1])
+wmctrl_module = Extension('wmctrl',
+                           sources = ['wmctrl/wmctrlmodule.c'])
+
+setup(
+    name = 'wmctrl',
+    version = '0.0.1',
+    author = "Lewis Chambers",
+    description = "Bindings for wmctrl",
+    license = "GPLv2",
+    keywords = "wmctrl window manager X control",
+    long_description = read("README"),
+    ext_modules = [wmctrl_module],
+    classifiers = [
+        "Development Status :: 1 - Planning",
+        "Environment :: Console",
+        "Environment :: X11 Applications",
+        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+        "Operating System :: POSIX :: Linux",
+        "Topic :: Desktop Environment :: Window Managers",
+    ],
+)
