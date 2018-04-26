@@ -1,9 +1,13 @@
 CFLAGS = -Wall $(shell python3-config --cflags)
 LDFLAGS = $(shell python3-config --ldflags)
+PYTHON = $(shell which python3)
 
-.PHONY = clean rpm build
+SRCDIR = wmctrl
+SOURCES = $(SRCDIR)/wmctrlmodule.c
 
-lala: wmctrlmodule.c setup.py
+.PHONY: clean rpm build test
+
+lala: $(SOURCES) setup.py
 	python3 setup.py build
 
 wmctrl.so: wmctrlmodule.c
@@ -14,3 +18,7 @@ rpm: setup.py wmctrlmodule.c
 
 clean:
 	python3 setup.py clean
+	rm -rf build/ dist/
+
+test:
+	(cd test; $(PYTHON) -m pytest .)

@@ -8,9 +8,10 @@ wmctrl_module = Extension('wmctrl',
                            sources = ['wmctrl/wmctrlmodule.c'])
 
 setup(
-    name = 'wmctrl',
+    name = 'cwmctrl',
     version = '0.0.1',
     author = "Lewis Chambers",
+    url = "https://github.com/lpchambers/python3-wmctrl",
     description = "Bindings for wmctrl",
     license = "GPLv2",
     keywords = "wmctrl window manager X control",
