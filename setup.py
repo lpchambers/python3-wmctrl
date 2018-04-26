@@ -15,7 +15,7 @@ setup(
     description = "Bindings for wmctrl",
     license = "GPLv2",
     keywords = "wmctrl window manager X control",
-    long_description = read("README"),
+    long_description = read("README.md"),
     ext_modules = [wmctrl_module],
     classifiers = [
         "Development Status :: 1 - Planning",
