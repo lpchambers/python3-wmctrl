@@ -1,0 +1,5 @@
+recursive-include wmctrl *.c
+include COPYING
+include README.md
+include setup.py
+include setup.cfg
