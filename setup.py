@@ -5,7 +5,8 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 wmctrl_module = Extension('wmctrl',
-                           sources = ['wmctrl/wmctrlmodule.c'])
+                           sources = ['wmctrl/wmctrlmodule.c'],
+                           libraries = ['X11'])
 
 setup(
     name = 'cwmctrl',
